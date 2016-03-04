@@ -336,12 +336,6 @@ _dbOptions( dbOptions )
 
     optional<URI> imageURI;
     conf.getIfSet( "icon", imageURI );
-    if ( imageURI.isSet() )
-    {
-        _image = imageURI->getImage();
-        if ( _image.valid() )
-            _image->setFileName( imageURI->base() );
-    }
 
     init();
 }
@@ -352,12 +346,6 @@ PlaceNode::getConfig() const
     Config conf( "place" );
     conf.add   ( "text",   _text );
     conf.addObj( "style",  _style );
-    if ( _image.valid() ) {
-        if ( !_image->getFileName().empty() )
-            conf.add( "icon", _image->getFileName() );
-        else if ( !_image->getName().empty() )
-            conf.add( "icon", _image->getName() );
-    }
 
     return conf;
 }
